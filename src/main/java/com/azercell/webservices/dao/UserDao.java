@@ -1,4 +1,4 @@
-package com.azercell.webservices;
+package com.azercell.webservices.dao;
 
 
 import com.azercell.webservices.entity.User;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Component
 public class UserDao {
-    private static List<User> userList = new ArrayList<>();
+    private static final List<User> userList = new ArrayList<>();
 
     private static int usersCount = 3;
 

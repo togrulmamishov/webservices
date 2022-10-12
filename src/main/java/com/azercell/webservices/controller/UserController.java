@@ -1,6 +1,6 @@
 package com.azercell.webservices.controller;
 
-import com.azercell.webservices.UserDao;
+import com.azercell.webservices.dao.UserDao;
 import com.azercell.webservices.entity.User;
 import com.azercell.webservices.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,11 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User retrieveUser(@PathVariable Integer id) {
-        return userDao.findOne(id)
+
+        User user = userDao.findOne(id)
                 .orElseThrow(() -> new UserNotFoundException("id = " + id));
+
+        return user;
     }
 
     @PostMapping("/users")

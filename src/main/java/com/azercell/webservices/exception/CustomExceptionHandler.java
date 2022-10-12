@@ -11,7 +11,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @ControllerAdvice
 @RestController
@@ -32,7 +31,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(),
                 request.getDescription(false));
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(exceptionResponse);
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND.value())
+                .body(exceptionResponse);
     }
 
     @Override
