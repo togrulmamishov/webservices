@@ -4,6 +4,7 @@ import com.azercell.webservices.dao.UserDao;
 import com.azercell.webservices.entity.User;
 import com.azercell.webservices.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping/*(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})*/
 @RequiredArgsConstructor
 public class UserController {
 
