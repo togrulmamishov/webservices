@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.azercell.webservices.mapper.PostMapper">
+    <resultMap id="PostMap" type="com.azercell.webservices.entity.Post">
+        <id property="id" column="post_id"/>
+        <result property="description" column="description"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+    <select id="getPostsByUserId" resultMap="PostMap">
+        SELECT *
+        FROM posts
+        WHERE posts.user_id=#{userId}
+    </select>
+    <select id="getCurrentId" resultType="java.lang.Integer">
+        SELECT POSTS_ID_SEQ.currval FROM dual
+    </select>
+
+    <insert id="createPost">
+        <selectKey resultType="int" keyProperty="id" order="BEFORE">
+            SELECT POSTS_ID_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO posts(post_id, description, user_id)
+        VALUES(#{id}, #{description}, #{userId})
+    </insert>
+</mapper>

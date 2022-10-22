@@ -3,17 +3,18 @@ package com.azercell.webservices.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.ToString;
 
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
+@ToString(exclude = "posts")
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "All details about the user")
@@ -28,4 +29,6 @@ public class User {
     @Past
     @ApiModelProperty(notes = "Birth date cannot be in the past")
     private Date birthDate;
+
+    private List<Post> posts;
 }

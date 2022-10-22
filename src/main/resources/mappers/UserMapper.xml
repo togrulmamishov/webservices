@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.azercell.webservices.mapper.UserMapper">
+    <resultMap id="user" type="com.azercell.webservices.entity.User">
+        <id property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="birthDate" column="BIRTH_DATE"/>
+<!--        <collection property="posts" column="post_id"-->
+<!--                    javaType="ArrayList" ofType="com.azercell.webservices.entity.Post"-->
+<!--                    resultMap="PostMap" select="selectPostsFromUser"/>-->
+    </resultMap>
+<!--    <resultMap id="PostMap" type="com.azercell.webservices.entity.Post">-->
+<!--        <id property="id" column="post_id"/>-->
+<!--        <result property="description" column="description"/>-->
+<!--        <result property="userId" column="user_id"/>-->
+<!--    </resultMap>-->
+    <delete id="deleteById">
+        DELETE
+        FROM users
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="user">
+        SELECT *
+        FROM users
+    </select>
+
+<!--    <select id="selectPostsFromUser" resultMap="com.azercell.webservices.mapper.PostMapper.post">-->
+<!--        SELECT * FROM posts where user_id = #{userId}-->
+<!--    </select>-->
+
+    <select id="findById" resultMap="user">
+        SELECT *
+        FROM users
+        WHERE id = #{id}
+    </select>
+    <select id="getInsertedId" resultType="java.lang.Integer">
+        SELECT USERS_ID_SEQ.currval
+        FROM dual
+    </select>
+    <insert id="save">
+        <selectKey resultType="int" keyProperty="id" order="BEFORE">
+            SELECT USERS_ID_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO users(id, name, birth_date)
+        VALUES (#{id}, #{name}, #{birthDate})
+    </insert>
+
+</mapper>
